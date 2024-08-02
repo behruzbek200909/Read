@@ -1,23 +1,31 @@
-const elList = document.querySelector(".list");
+const elList = document.querySelector(".list")
 
-const renderPost = (arr, htmlElement) => {
-  arr.forEach((item) => {
-    const newLi = document.createElement("li");
-    const newP = document.createElement("p");
-    const newTitle = document.createElement("h4");
-    const newText = document.createElement("p");
+function renderBooks(arr, htmlElement) {
+  arr.forEach((element) => {
+    const newLi = document.createElement("li")
+    const newimg = document.createElement("img")
+    const newTitle = document.createElement("h4")
+    const newText = document.createElement("p")
+    const newSecondText = document.createElement("p")
+    const newBtn1 = document.createElement("button")
+    const newBtn2 = document.createElement("button")
+    const newBtn3 = document.createElement("button")
 
-    newP.textContent = item.id;
-    newTitle.textContent = item.title;
-    newText.textContent = item.body;
+    newBtn1.textContent = "Bookmark"
+    newBtn2.textContent = "More info"
+    newBtn1.textContent = "Read"
+    newTitle.textContent = element.volumeInfo.title
+    newText.textContent = element.volumeInfo.description
+    newSecondText.textContent = element.volumeInfo.publishedDate
+    newimg.setAttribute("src", `${element.volumeInfo.imageLinks.thumbnail}`)
 
-    newLi.appendChild(newP);
-    newLi.appendChild(newTitle);
-    newLi.appendChild(newText);
-    htmlElement.appendChild(newLi);
-  });
-};
-
-fetch("https://www.googleapis.com/books/v1/volumes?qsearch+terms")
-  .then((res) => res.json())
-  .then((data) => renderPost(data, elList));
+    newLi.appendChild(newimg)
+    newLi.appendChild(newTitle)
+    newLi.appendChild(newText)
+    newLi.appendChild(newSecondText)
+    newLi.appendChild(newBtn1)
+    newLi.appendChild(newBtn2)
+    newLi.appendChild(newBtn3)
+    htmlElement.appendChild(newLi)
+  })
+}
